@@ -10,7 +10,6 @@
 
 می‌توانید نسخه کامل و زنده این مقاله را در لینک زیر مشاهده کنید:
 
-**[لینک GitHub Pages پروژه شما را اینجا قرار دهید]**
 
 *(https://hamedshabanzadeh.github.io/AI-Fact-Check/)*
 
