@@ -1,221 +1,472 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Fact-Check: چطور با کمک ai صحت مطالب آنلاین رو تا حد قابل قبولی بسنجیم؟</title>
-    <style>
-        body {
-            font-family: 'B Nazanin', Arial, sans-serif; /* Fallback to Arial, sans-serif if B Nazanin is not available */
-            line-height: 1.8; /* Increased line height for better readability */
-            margin: 20px;
-            background-color: #f4f7f6;
-            color: #333;
-            direction: rtl; /* For RTL text */
-            text-align: right; /* Default align to right for general text */
-        }
-        .container {
-            max-width: 850px; /* Slightly wider container */
-            margin: 40px auto;
-            padding: 35px; /* Increased padding */
-            background-color: #ffffff;
-            border-radius: 15px; /* Softer corners */
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Stronger shadow for depth */
-            border: 1px solid #e0e0e0;
-        }
-        h1, h2 {
-            color: #0056b3;
-            text-align: center;
-            margin-bottom: 30px; /* More space below headings */
-            font-weight: bold;
-        }
-        h1 {
-            font-size: 2.2em; /* Larger main title */
-        }
-        h2 {
-            font-size: 1.8em; /* Larger subheading */
-        }
-        .intro-box {
-            background-color: #e6f3ff;
-            border-right: 5px solid #007bff; /* Changed to right for RTL */
-            padding: 20px 30px; /* More padding */
-            margin-bottom: 35px;
-            border-radius: 10px; /* Softer corners */
-            font-size: 1.1em; /* Slightly larger font */
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-        .intro-box p {
-            margin-bottom: 15px;
-            text-align: justify; /* Justify text within this box */
-        }
-        .intro-box p:last-child {
-            margin-bottom: 0;
-        }
-        .instruction-highlight {
-            background-color: #ffecc0; /* Light yellow background */
-            border-right: 5px solid #ffc107; /* Orange border for highlight */
-            padding: 20px 30px;
-            margin-top: 30px;
-            margin-bottom: 35px;
-            border-radius: 10px;
-            font-size: 1.15em; /* Larger font for this important section */
-            font-weight: bold;
-            color: #5a5a5a;
-            position: relative; /* For positioning the copy button */
-        }
-        .instruction-highlight strong {
-            color: #d68000; /* Darker orange for strong text */
-        }
-        /* Apply justify to paragraphs within instruction-highlight */
-        .instruction-highlight p {
-            text-align: justify;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="یک روش ساده و کاربردی برای صحت‌سنجی مطالب آنلاین با کمک هوش مصنوعی">
+  <title>صحت‌سنجی مطالب آنلاین با هوش مصنوعی</title>
 
-        .copy-button {
-            position: absolute;
-            top: 15px; /* Adjust as needed */
-            left: 15px; /* Position on the left for RTL layout */
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9em;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.1s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px; /* Space between icon and text */
-        }
-        .copy-button:hover {
-            background-color: #0056b3;
-            transform: translateY(-1px);
-        }
-        .copy-button:active {
-            transform: translateY(0);
-        }
-        /* Icon for copy button - using a simple character or can be replaced with an SVG */
-        .copy-button::before {
-            content: '📋'; /* Clipboard emoji */
-            font-size: 1.1em;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-        .call-to-action {
-            background-color: #d4edda;
-            border: 1px solid #28a745;
-            padding: 25px; /* More padding */
-            margin-top: 40px;
-            border-radius: 10px;
-            text-align: center; /* Keep this centered as it's a call to action */
-            font-size: 1.15em;
-            color: #155724;
-            font-weight: 500;
-        }
-        .hashtags {
-            text-align: center;
-            margin-top: 35px;
-            font-size: 0.95em;
-            color: #666;
-            line-height: 1.8;
-        }
-        .hashtags span {
-            display: inline-block;
-            background-color: #eee;
-            padding: 6px 12px;
-            border-radius: 6px;
-            margin: 6px;
-            color: #007bff;
-            font-weight: 500;
-            transition: background-color 0.2s ease;
-        }
-        .hashtags span:hover {
-            background-color: #e0e0e0;
-        }
-        /* RTL specific adjustments - ensuring consistency */
-        .instruction-highlight {
-            border-left: none;
-            border-right: 5px solid #ffc107;
-        }
+  <style>
+    :root {
+      --page-bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-soft: #f8fafc;
+      --text: #1e293b;
+      --muted: #64748b;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-soft: #eff6ff;
+      --warning-soft: #fffbeb;
+      --warning-border: #f59e0b;
+      --success-soft: #f0fdf4;
+      --success-border: #22c55e;
+      --border: #e2e8f0;
+      --shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+      --radius-large: 24px;
+      --radius-medium: 16px;
+    }
 
-        /* Styles for the new contact link section */
-        .contact-link-section {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px dashed #a0a0a0; /* A dashed line to separate */
-            text-align: center;
-            font-size: 1.05em;
-            color: #555;
-        }
-        .contact-link-section a {
-            color: #007bff;
-            text-decoration: none; /* No underline by default */
-            font-weight: bold;
-            transition: color 0.3s ease, text-decoration 0.3s ease;
-        }
-        .contact-link-section a:hover {
-            color: #0056b3;
-            text-decoration: underline; /* Underline on hover */
-        }
-    </style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Vazirmatn", Tahoma, Arial, sans-serif;
+      line-height: 1.95;
+      background:
+        radial-gradient(circle at top right, rgba(37, 99, 235, 0.08), transparent 28rem),
+        var(--page-bg);
+      color: var(--text);
+      text-align: right;
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    .page {
+      width: min(100% - 32px, 760px);
+      margin: 48px auto;
+    }
+
+    .container {
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: var(--radius-large);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 56px 48px 42px;
+      text-align: center;
+      background:
+        linear-gradient(180deg, rgba(239, 246, 255, 0.95), rgba(255, 255, 255, 0.9));
+      border-bottom: 1px solid var(--border);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 7px 14px;
+      border: 1px solid #bfdbfe;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1e40af;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    h1,
+    h2 {
+      margin-top: 0;
+      color: #0f172a;
+    }
+
+    h1 {
+      max-width: 650px;
+      margin-right: auto;
+      margin-left: auto;
+      margin-bottom: 14px;
+      font-size: clamp(2rem, 5vw, 3.15rem);
+      line-height: 1.45;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      max-width: 610px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.95;
+    }
+
+    .content {
+      padding: 40px 48px 48px;
+    }
+
+    .intro-box,
+    .prompt-section,
+    .call-to-action {
+      margin-bottom: 28px;
+      border-radius: var(--radius-medium);
+    }
+
+    .intro-box {
+      padding: 26px 28px;
+      border-right: 4px solid var(--primary);
+      background: var(--primary-soft);
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    .prompt-section {
+      overflow: hidden;
+      border: 1px solid #fde68a;
+      background: var(--warning-soft);
+    }
+
+    .prompt-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 22px 24px;
+      border-bottom: 1px solid #fde68a;
+    }
+
+    .prompt-heading-wrap {
+      min-width: 0;
+    }
+
+    .prompt-kicker {
+      display: block;
+      margin-bottom: 4px;
+      color: #92400e;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .prompt-header h2 {
+      margin-bottom: 0;
+      font-size: clamp(1.25rem, 4vw, 1.65rem);
+      line-height: 1.65;
+    }
+
+    .copy-button {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 10px 16px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--primary);
+      color: #fff;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.2);
+      transition: transform 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .copy-button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(37, 99, 235, 0.24);
+    }
+
+    .copy-button:active {
+      transform: translateY(0);
+    }
+
+    .copy-button:focus-visible,
+    .contact-button:focus-visible {
+      outline: 3px solid rgba(37, 99, 235, 0.25);
+      outline-offset: 3px;
+    }
+
+    .copy-icon {
+      font-size: 1.05rem;
+      line-height: 1;
+    }
+
+    .prompt-body {
+      padding: 26px 28px 28px;
+      color: #3f3f46;
+    }
+
+    .prompt-body ol {
+      margin: 18px 0;
+      padding-right: 24px;
+    }
+
+    .prompt-body li {
+      margin-bottom: 12px;
+      padding-right: 6px;
+    }
+
+    .call-to-action {
+      padding: 26px 28px;
+      border-right: 4px solid var(--success-border);
+      background: var(--success-soft);
+      color: #14532d;
+    }
+
+    .call-to-action strong {
+      color: #166534;
+    }
+
+    .contact-link-section {
+      padding-top: 30px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .contact-link-section p {
+      color: var(--muted);
+    }
+
+    .contact-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 11px 20px;
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+    }
+
+    .contact-button:hover {
+      transform: translateY(-1px);
+      border-color: #93c5fd;
+      background: #dbeafe;
+    }
+
+    .footer-note {
+      margin-top: 24px;
+      color: #94a3b8;
+      font-size: 0.86rem;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: 100%;
+        margin: 0;
+      }
+
+      .container {
+        min-height: 100vh;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .hero {
+        padding: 40px 20px 32px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
+
+      .content {
+        padding: 24px 16px 32px;
+      }
+
+      .intro-box,
+      .prompt-body,
+      .call-to-action {
+        padding-right: 20px;
+        padding-left: 20px;
+      }
+
+      .prompt-header {
+        align-items: stretch;
+        flex-direction: column;
+        padding: 20px;
+      }
+
+      .copy-button {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>چطور با کمک ai صحت مطالب آنلاین رو تا حد قابل قبولی بسنجیم؟</h1>
+  <main class="page">
+    <article class="container">
+      <header class="hero">
+        <div class="eyebrow">راهنمای کاربردی هوش مصنوعی</div>
+        <h1>صحت‌سنجی مطالب آنلاین با هوش مصنوعی</h1>
+        <p class="subtitle">
+          یک روش ساده برای بررسی اعتبار پست‌ها، خبرها و محتوای منتشرشده در شبکه‌های اجتماعی و وب
+        </p>
+      </header>
 
-        <div class="intro-box">
-            <p>داشتم یک پست رو توی لینکدین می‌خوندم. کنجکاو شدم ببینم واقعاً این مطالبی که نوشته صحت دارن یا نه. متن پست رو کپی کردم و انداختم توی ChatGPT و ازش خواستم صحت اطلاعات رو بررسی کنه.</p>
-            <p>نتیجه جالب بود: به‌جای جواب سطحی، ChatGPT تحلیل کاملی ارایه داد، با ارجاع به منابع معتبر و حتی بهم گفت کجا ممکنه اطلاعات گمراه‌کننده باشه!</p>
-            <p>💡همین‌جا بود که به ذهنم رسید یه دستورالعمل نسبتا قابل قبول برای صحت‌سنجی محتوا با کمک AI تهیه کنم — چیزی که بشه بارها و بارها برای تحلیل محتوای متنی در سوشال مدیا یا وب استفاده کرد.</p>
-        </div>
+      <div class="content">
+        <section class="intro-box" aria-label="مقدمه">
+          <p>
+            داشتم یک پست را در لینکدین می‌خواندم. کنجکاو شدم ببینم مطالب نوشته‌شده واقعاً صحت دارند یا نه.
+            متن پست را کپی کردم و در ChatGPT قرار دادم و از آن خواستم اطلاعات را بررسی کند.
+          </p>
+          <p>
+            نتیجه جالب بود: به‌جای یک پاسخ سطحی، ChatGPT تحلیل نسبتاً کاملی ارائه داد، به منابع معتبر اشاره کرد
+            و حتی توضیح داد کدام بخش‌ها ممکن است گمراه‌کننده باشند.
+          </p>
+          <p>
+            💡 همین‌جا بود که به ذهنم رسید یک دستورالعمل کاربردی برای صحت‌سنجی محتوا با کمک هوش مصنوعی تهیه کنم؛
+            چیزی که بتوان بارها برای تحلیل محتوای متنی در شبکه‌های اجتماعی یا وب از آن استفاده کرد.
+          </p>
+        </section>
 
-        <div class="instruction-highlight">
-            <h2 id="prompt-heading"> این چیزیه که باید به ChatGPT یا Gemini بگین:</h2>
-            <button class="copy-button" onclick="copyPrompt()">کپی پرامپت</button>
-            <div id="prompt-text">
-                <p>من قصد دارم لینک یک مطلب از شبکه‌های اجتماعی یا وب‌سایت‌ها را به شما بدهم تا شما آن را برای من صحت‌سنجی کنید. دستورالعمل کلی صحت‌سنجی از شما این است:</p>
-                <p>1. متن اصلی موجود در لینک را با دقت بخوان و خلاصه‌ای از ادعاهای اصلی آن را ارایه بده.</p>
-                <p>2. با استفاده از دانش خود و با جستجو در منابع معتبر (مثل خبرگزاری‌های رسمی، سازمان‌های پژوهشی، وب‌سایت‌های دولتی و...)، صحت این ادعاها را بررسی کن.</p>
-                <p>3. اگر اطلاعاتی غلط، گمراه‌کننده یا ناقص در مطلب وجود داشت، آن‌ها را مشخص کن و توضیح بده چرا.</p>
-                <p>4. در نهایت، یک نتیجه‌گیری کلی درباره میزان اعتبار و صحت مطلب ارایه بده و به من بگو آیا می‌توانم به آن اعتماد کنم یا خیر.</p>
-                <p>5. در صورت نیاز، چند منبع معتبر دیگر را که برای تأیید یا رد اطلاعات می‌توانم به آن‌ها مراجعه کنم، معرفی کن.</p>
-                <p>آیا برای این کار آماده‌ای؟ لطفاً در صورت آمادگی، از من بخواه که لینک مطلب مورد نظرم را ارسال کنم.</p>
+        <section class="prompt-section" aria-labelledby="prompt-heading">
+          <div class="prompt-header">
+            <div class="prompt-heading-wrap">
+              <span class="prompt-kicker">پرامپت آماده استفاده</span>
+              <h2 id="prompt-heading">این متن را به ChatGPT یا Gemini بدهید</h2>
             </div>
-        </div>
 
-        <div class="call-to-action">
-            <p>از اون موقع به بعد، قبل از لایک یا بازنشر یه مطلب، اول یه "AI Fact-check" انجام میدم!</p>
-            <p>توصیه می‌کنم شما هم امتحانش کنید؛ هم سریع و ساده‌ست و هم کمک می‌کنه از افتادن در دام اطلاعات نادرست جلوگیری کنیم.</p>
-        </div>
+            <button class="copy-button" type="button" onclick="copyPrompt()" aria-label="کپی‌کردن پرامپت">
+              <span class="copy-icon" aria-hidden="true">📋</span>
+              <span class="copy-label">کپی پرامپت</span>
+            </button>
+          </div>
 
+          <div class="prompt-body" id="prompt-text">
+            <p>
+              من قصد دارم لینک یک مطلب از شبکه‌های اجتماعی یا وب‌سایت‌ها را به شما بدهم تا آن را برای من صحت‌سنجی کنید.
+              دستورالعمل کلی صحت‌سنجی از شما این است:
+            </p>
 
-        <div class="contact-link-section">
-            <p>برای ارتباط مستقیم با من، می‌توانید از لینک زیر استفاده کنید:</p>
-            <p><a href="https://linktr.ee/hamed.shabanzadeh" target="_blank">حامد شعبان‌زاده</a></p>
-        </div>
-        </div>
+            <ol>
+              <li>متن اصلی موجود در لینک را با دقت بخوان و خلاصه‌ای از ادعاهای اصلی آن ارائه بده.</li>
+              <li>
+                با استفاده از دانش خود و با جست‌وجو در منابع معتبر، مانند خبرگزاری‌های رسمی، سازمان‌های پژوهشی و
+                وب‌سایت‌های دولتی، صحت این ادعاها را بررسی کن.
+              </li>
+              <li>
+                اگر اطلاعاتی غلط، گمراه‌کننده یا ناقص در مطلب وجود داشت، آن‌ها را مشخص کن و توضیح بده چرا.
+              </li>
+              <li>
+                در پایان، یک نتیجه‌گیری کلی درباره میزان اعتبار مطلب ارائه بده و مشخص کن تا چه اندازه می‌توان به آن اعتماد کرد.
+              </li>
+              <li>
+                در صورت نیاز، چند منبع معتبر دیگر را که برای تأیید یا رد اطلاعات می‌توان به آن‌ها مراجعه کرد، معرفی کن.
+              </li>
+            </ol>
 
-    <script>
-        function copyPrompt() {
-            const promptTextElement = document.getElementById('prompt-text');
-            const tempTextArea = document.createElement('textarea');
-            tempTextArea.value = promptTextElement.textContent.trim();
-            document.body.appendChild(tempTextArea);
-            tempTextArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempTextArea);
+            <p>
+              آیا برای این کار آماده‌ای؟ لطفاً در صورت آمادگی، از من بخواه لینک مطلب موردنظرم را ارسال کنم.
+            </p>
+          </div>
+        </section>
 
-            const copyButton = document.querySelector('.copy-button');
-            const originalText = copyButton.textContent;
-            
-            copyButton.textContent = 'کپی شد! ✅';
-            copyButton.style.backgroundColor = '#28a745';
+        <section class="call-to-action" aria-label="پیشنهاد نهایی">
+          <p>
+            از آن زمان به بعد، پیش از لایک‌کردن یا بازنشر یک مطلب، ابتدا یک
+            <strong>AI Fact-check</strong> انجام می‌دهم.
+          </p>
+          <p>
+            پیشنهاد می‌کنم شما هم امتحانش کنید؛ سریع و ساده است و کمک می‌کند کمتر در دام اطلاعات نادرست بیفتیم.
+          </p>
+        </section>
 
-            setTimeout(() => {
-                copyButton.textContent = originalText;
-                copyButton.style.backgroundColor = '#007bff';
-            }, 2000);
+        <section class="contact-link-section" aria-label="راه ارتباطی">
+          <p>برای مشاهده راه‌های ارتباطی و شبکه‌های اجتماعی من:</p>
+          <a
+            class="contact-button"
+            href="https://linktr.ee/hamed.shabanzadeh"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ارتباط با حامد شعبان‌زاده
+          </a>
+          <div class="footer-note">تهیه‌شده برای استفاده عمومی و آموزشی</div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <script>
+    async function copyPrompt() {
+      const promptElement = document.getElementById("prompt-text");
+      const button = document.querySelector(".copy-button");
+      const label = button.querySelector(".copy-label");
+      const originalLabel = label.textContent;
+      const text = promptElement.innerText.trim();
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const textArea = document.createElement("textarea");
+          textArea.value = text;
+          textArea.setAttribute("readonly", "");
+          textArea.style.position = "fixed";
+          textArea.style.opacity = "0";
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand("copy");
+          textArea.remove();
         }
-    </script>
+
+        label.textContent = "کپی شد";
+        button.style.backgroundColor = "#16a34a";
+
+        setTimeout(() => {
+          label.textContent = originalLabel;
+          button.style.backgroundColor = "";
+        }, 2000);
+      } catch (error) {
+        label.textContent = "کپی نشد";
+
+        setTimeout(() => {
+          label.textContent = originalLabel;
+        }, 2000);
+      }
+    }
+  </script>
 </body>
 </html>
