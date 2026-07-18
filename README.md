@@ -11,7 +11,7 @@
 می‌توانید نسخه کامل و زنده این محتوا را در لینک زیر مشاهده کنید:
 
 
-*(https://hamedshabanzadeh.github.io/AI-Fact-Check/)*
+*https://hamedshabanzadeh.github.io/AI-Fact-Check/*
 
 ## موضوعات کلیدی مطرح شده
 
